@@ -6,11 +6,12 @@ function App() {
   const [takenimg,setTakenImg] = React.useState(null);
   return (
     <div className="flex justify-center items-center sm:-4">
-      <div className="flex flex-col items-center justify-between sm:w-[50%] rounded-lg w-[100%] shadow-lg">
+      <div className="flex flex-col items-center sm:w-[90%] rounded-lg w-[100%] shadow-lg min-h-screen">
         <Nav page="home"/>
-        <UpImage takenimg={takenimg} setTakenImg={setTakenImg}/>
-        <AIPrompt img={takenimg}/>
-        <h2>body</h2>
+        <div className="sm:flex w-full sm:p-10">
+          <UpImage takenimg={takenimg} setTakenImg={setTakenImg}/>
+          <AIPrompt img={takenimg}/>
+        </div>
       </div>
     </div>
   );
