@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="flex justify-center items-center sm:-4">
       <div className="flex flex-col items-center justify-between sm:w-[50%] rounded-lg w-[100%] shadow-lg">
-        <Nav/>
+        <Nav page="home"/>
         <UpImage takenimg={takenimg} setTakenImg={setTakenImg}/>
         <AIPrompt img={takenimg}/>
         <h2>body</h2>
