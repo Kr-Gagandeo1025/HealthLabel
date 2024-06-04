@@ -2,6 +2,7 @@ import React from 'react'
 import AIPrompt from "./components/AIPrompt";
 import Nav from "./components/Nav"
 import UpImage from "./components/UpImage";
+// import { AuthProvider } from './contexts/authContext';
 function App() {
   const [takenimg,setTakenImg] = React.useState(null);
   return (
