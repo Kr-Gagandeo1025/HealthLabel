@@ -58,9 +58,9 @@ const UpImage = ({takenimg,setTakenImg}) => {
             theme="light"
             transition={Slide}
         />
-        <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
-        onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-        />
+            <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
+            onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
+            />
         <div className="flex justify-between items-center">
             {takenimg && <img src={takenimg} alt="label" className="h-[100px] p-2 rounded-2xl"/>}
             <div className='flex gap-2 justify-between items-center'>
