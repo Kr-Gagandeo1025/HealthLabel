@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import Webcam from "react-webcam";
 import Camera, { FACING_MODES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
@@ -9,8 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const UpImage = ({takenimg,setTakenImg}) => {
-    // const [takenimg,setTakenImg] = React.useState(null);
-    const [cameraPos, setCameraPos] = React.useState(FACING_MODES.USER)
+    const [cameraPos, setCameraPos] = useState(FACING_MODES.USER)
     const toastData = {
         position: "top-center",
         autoClose: 1500,

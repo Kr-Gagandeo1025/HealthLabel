@@ -10,13 +10,11 @@ const Login = () => {
   const onGoogleSignIn = (e) => {
     e.preventDefault();
     if(!isSignedIn){
-      console.log("login attempt")
       setIsSignIn(true)
       doSignInwithGoogle().catch(err=>{
         setIsSignIn(false)
       })
     }
-    console.log(userLoggedIn)
   }
   return (
     <>

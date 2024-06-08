@@ -56,9 +56,8 @@ const NutrientCheckerForm = ({user}) => {
     if(formData.age === "" || formData.gender === "" || formData.height === "" || formData.weight === ""){
         toast.error('Please fill * marked fields!', toastData)
     }else{
-        console.log('Form Data:', formData);
         try{
-          const docRef = await addDoc(collection(db, "healthdata"),{
+          await addDoc(collection(db, "healthdata"),{
             name,
             email,
             age,
