@@ -50,6 +50,7 @@ const UpImage = ({takenimg,setTakenImg}) => {
 
     reader.onloadend = () => {
       setTakenImg(reader.result);
+      toast.success("Label Uploaded!",toastData);
     };
 
     reader.readAsDataURL(file);
