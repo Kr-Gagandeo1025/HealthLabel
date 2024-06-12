@@ -13,7 +13,7 @@ const Nav = ({page}) => {
           userLoggedIn
           ?
           <>
-            {page=="home" && <Link to="profile"><img src={currentUser.photoURL} alt="profilepic" className='h-[40px] w-[40px] rounded-full border-2 border-black'/></Link>}
+            {page==="home" && <Link to="profile"><img src={currentUser.photoURL} alt="profilepic" className='h-[40px] w-[40px] rounded-full border-2 border-black'/></Link>}
             <button className="p-1 rounded-full sm:text-xl border border-black border-solid w-[100px] hover:bg-black hover:text-white" onClick={()=>{doSingOut().then(()=>{(<Navigate to={'/'} replace={true}/>)})}}>Logout</button>
           </>
           :

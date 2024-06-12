@@ -86,8 +86,8 @@ const Profile = () => {
               *deleting data will delete all your health data from our servers and logout.
             </p>
             <div className='flex gap-3 my-3'>
-              <button className='p-2 border border-black rounded-xl bg-blue-600' onClick={handleDataUpdate}>Re-Submit Data</button>
-              <button className='p-2 border border-black rounded-xl bg-red-600' onClick={handleDataDelete}>Delete Data</button>
+              <button className='p-2 border border-gray-400 rounded-xl bg-blue-600' onClick={handleDataUpdate}>Re-Submit Data</button>
+              <button className='p-2 border border-gray-400 rounded-xl bg-red-600' onClick={handleDataDelete}>Delete Data</button>
             </div>
           </div>
           :
