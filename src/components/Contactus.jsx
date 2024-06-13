@@ -9,10 +9,10 @@ const Contactus = () => {
     <div className='flex flex-col border p-4 my-2 w-[90%] rounded-xl'>
       <h1 className='text-xl font-bold'>Reach us via</h1>
       <div className='flex gap-3 text-3xl p-4 justify-center items-center'>
-        <MdEmail/>
-        <BsGithub/>
-        <CgInstagram/>
-        <FiX/>
+        <a href="mailto:kumargagandeo9@gmail.com" target='_blank' rel='noreferrer'><MdEmail/></a>
+        <a href="https://github.com/Kr-Gagandeo1025/HealthLabel" target='_blank' rel='noreferrer'><BsGithub/></a>
+        <a href="https://www.instagram.com/web.dev.spotlight?igsh=MWkyczU3OGRpeGZ6bA==" target="_blank" rel='noreferrer'><CgInstagram/></a>
+        <a href="https://x.com/k_gagandeo?t=krL7rGGEIBPPf59a9Yugxg&s=09" target="_blank" rel='noreferrer'><FiX/></a>
       </div>
     </div>
   )

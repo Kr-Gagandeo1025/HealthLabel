@@ -82,7 +82,7 @@ const UpImage = ({takenimg,setTakenImg}) => {
         </div>
       </div>
       <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
-      <p className="text-[11px] opacity-65">*this image will be used for analysis you can retake if image is not clear</p>
+      <p className="text-[11px] text-gray-400 text-bold">*this image will be used for analysis you can retake if image is not clear</p>
     </div>
   )
 }

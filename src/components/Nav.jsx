@@ -14,15 +14,15 @@ const Nav = ({page}) => {
           ?
           <>
             {page==="home" && <Link to="profile"><img src={currentUser.photoURL} alt="profilepic" className='h-[40px] w-[40px] rounded-full border-2 border-black'/></Link>}
-            <button className="p-1 rounded-full sm:text-xl border border-black border-solid w-[100px] hover:bg-black hover:text-white" onClick={()=>{doSingOut().then(()=>{(<Navigate to={'/'} replace={true}/>)})}}>Logout</button>
+            <button className="p-1 rounded-full sm:text-xl border border-gray-200 border-solid w-[100px] hover:bg-black hover:text-white" onClick={()=>{doSingOut().then(()=>{(<Navigate to={'/'} replace={true}/>)})}}>Logout</button>
           </>
           :
           <>
-            <Link to="auth"><button className="p-1  rounded-full sm:text-xl border border-black border-solid w-[100px] bg-black text-white hover:bg-white hover:text-black">Login</button></Link>
+            <Link to="auth"><button className="p-1  rounded-full sm:text-xl border border-gray-200 border-solid w-[100px] bg-black text-white hover:bg-white hover:text-black">Login</button></Link>
           </>
 
         }
-        {page==="profile" && <button className="p-1  rounded-full sm:text-xl border border-black border-solid w-[100px] hover:bg-black hover:text-white"><Link to="/">&lt; Home</Link></button>}
+        {page==="profile" && <button className="p-1  rounded-full sm:text-xl border border-gray-200 border-solid w-[100px] hover:bg-black hover:text-white"><Link to="/">Home</Link></button>}
       </div>
     </div>
   )

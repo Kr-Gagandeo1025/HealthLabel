@@ -6,6 +6,7 @@ import { useAuth } from './contexts/authContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase/firebase';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import Balance from './components/Balance';
 
 // import { AuthProvider } from './contexts/authContext';
 function App() {
@@ -18,7 +19,7 @@ function App() {
   const getData = async() =>{
     const querySnapshot = await getDocs(collection(db, "healthdata"));
     querySnapshot.forEach((doc) => {
-      if(doc.data().email === currentUser.email){
+      if(doc.data().email === currentUser?.email){
         setUserData(
           `My age is ${doc.data().age}, ${doc.data().gender}, weight is ${doc.data().weight}, height is ${doc.data().height} cm.
           My allergies are/is ${doc.data().allergies}. My health Conditions are/is ${doc.data().healthConditions}.
@@ -31,7 +32,7 @@ function App() {
   }
   useEffect(()=>{
     getData()
-  },[])
+  })
   const gen = async () => {
     try{
       if(userData !== "") {
@@ -57,16 +58,20 @@ function App() {
     
   }
   return (
-    <div className="flex justify-center items-center sm:-4">
-      <div className="flex flex-col items-center sm:w-[70%] rounded-lg w-[100%] min-h-screen">
+    <div className="flex justify-center items-center sm:-4 bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200">
+      <div className="flex flex-col items-center lg:w-[70%] rounded-lg w-[100%] min-h-screen">
         <Nav page="home"/>
-        <div className="sm:flex w-full sm:p-10">
+        <div className='flex w-full justify-end items-center p-4 mb-0'>
+          <Balance/>
+        </div>
+        <div className="lg:flex-row w-full sm:p-4 flex flex-col justify-center items-center">
           <UpImage takenimg={takenimg} setTakenImg={setTakenImg}/>
           {currentUser &&
           <AIPrompt img={takenimg} getData={gen} response={genResponse} loading={loading}/>
           }
           {!currentUser && <p className='text-gray-500 px-5 py-5 text-center'>Login and Fill Health Info to get Prompts</p>}
         </div>
+      <p className='text-gray-400  text-bold'>*please do not upload photos that are not food nutrient label and hit on check label. You will just overuse our API with vague requests.</p>
       </div>
     </div>
   );

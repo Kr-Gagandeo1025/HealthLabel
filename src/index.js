@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Profile from './Profile';
+import Profile from './pages/Profile';
 import Login from './components/auth/Login';
 import { AuthProvider } from './contexts/authContext';
 

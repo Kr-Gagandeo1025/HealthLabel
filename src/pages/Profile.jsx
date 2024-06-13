@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import NutrientCheckerForm from './components/NutrientCheckerForm'
-import Nav from './components/Nav';
-import { useAuth } from './contexts/authContext';
+import NutrientCheckerForm from '../components/NutrientCheckerForm'
+import Nav from '../components/Nav';
+import { useAuth } from '../contexts/authContext';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
-import { db } from './firebase/firebase';
-import Contactus from './components/Contactus';
+import { db } from '../firebase/firebase';
+import Contactus from '../components/Contactus';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { doSingOut } from './firebase/auth';
+import { doSingOut } from '../firebase/auth';
+import Balance from '../components/Balance';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Profile = () => {
   }
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-start bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200 min-h-screen'>
       <ToastContainer
             position="top-center"
             autoClose={1500}
@@ -75,8 +76,11 @@ const Profile = () => {
             theme="light"
             transition={Slide}
         />
-        <div className='flex flex-col items-center justify-between sm:w-[50%] w-[100%]'>
+        <div className='flex flex-col items-center justify-between lg:w-[50%] w-[100%]'>
         <Nav page="profile"/>
+        <div className='flex w-full justify-end items-center p-4 mb-0'>
+          <Balance/>
+        </div>
         {currentUser && <h1 className="text-left w-full px-1 font-bold">Hey 👋, {currentUser.displayName}</h1>}
         {
           userExists?
