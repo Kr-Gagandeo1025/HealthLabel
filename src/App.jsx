@@ -17,18 +17,22 @@ function App() {
   const [genResponse,setGenResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const getData = async() =>{
-    const querySnapshot = await getDocs(collection(db, "healthdata"));
-    querySnapshot.forEach((doc) => {
-      if(doc.data().email === currentUser?.email){
-        setUserData(
-          `My age is ${doc.data().age}, ${doc.data().gender}, weight is ${doc.data().weight}, height is ${doc.data().height} cm.
-          My allergies are/is ${doc.data().allergies}. My health Conditions are/is ${doc.data().healthConditions}.
-          My nutrient concerns are/is ${doc.data().nutrientConcerns}. Is the food with provided Nutrient Label is good for my consumption.
-          Provide me it's consumptions guidelines.
-          `
-        )
-      };
-    });
+    try{
+      const querySnapshot = await getDocs(collection(db, "healthdata"));
+      querySnapshot.forEach((doc) => {
+        if(doc.data().email === currentUser?.email){
+          setUserData(
+            `My age is ${doc.data().age}, ${doc.data().gender}, weight is ${doc.data().weight}, height is ${doc.data().height} cm.
+            My allergies are/is ${doc.data().allergies}. My health Conditions are/is ${doc.data().healthConditions}.
+            My nutrient concerns are/is ${doc.data().nutrientConcerns}. Is the food with provided Nutrient Label is good for my consumption.
+            Provide me it's consumptions guidelines.
+            `
+          )
+        };
+      });
+    }catch(e){
+      console.log("Error getting data login please!")
+    }
   }
   useEffect(()=>{
     getData()
@@ -71,7 +75,7 @@ function App() {
           }
           {!currentUser && <p className='text-gray-500 px-5 py-5 text-center'>Login and Fill Health Info to get Prompts</p>}
         </div>
-      <p className='text-gray-400  text-bold'>*please do not upload photos that are not food nutrient label and hit on check label. You will just overuse our API with vague requests.</p>
+      <p className='text-gray-400 text-bold px-2'>*please do not upload photos that are not food nutrient label and hit on check label. You will just overuse our API with vague requests.</p>
       </div>
     </div>
   );

@@ -28,7 +28,10 @@ const NutrientCheckerForm = ({user}) => {
     weight: '',
     healthConditions: [],
     nutrientConcerns: [],
-    allergies:[]
+    allergies:[],
+    healthConditionsSpecific:'',
+    nutrientConcersSpecific:'',
+    allergiesSpecific:''
   });
 
   const handleChange = (e) => {
@@ -50,9 +53,11 @@ const NutrientCheckerForm = ({user}) => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    const {name, email, age, gender, height, weight, healthConditions, nutrientConcerns, allergies} = formData;
+    console.log(formData);
+
+    const {name, email, age, gender, height, weight, healthConditions, nutrientConcerns, allergies, healthConditionsSpecific,
+      nutrientConcersSpecific,allergiesSpecific} = formData;
     if(formData.age === "" || formData.gender === "" || formData.height === "" || formData.weight === ""){
         toast.error('Please fill * marked fields!', toastData)
     }else{
@@ -66,7 +71,10 @@ const NutrientCheckerForm = ({user}) => {
             weight,
             healthConditions,
             nutrientConcerns,
-            allergies
+            allergies,
+            healthConditionsSpecific,
+            nutrientConcersSpecific,
+            allergiesSpecific
           });
           toast.success("Form Submited! Redirecting Home...");
           setTimeout(()=>{
@@ -95,7 +103,7 @@ const NutrientCheckerForm = ({user}) => {
         />
 
       <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
-      <form onSubmit={handleSubmit} method='POST'>
+      <form onSubmit={handleSubmit} >
       <div className="mb-4">
           <label className="block text-gray-700">Name*:</label>
           <input 
@@ -221,6 +229,28 @@ const NutrientCheckerForm = ({user}) => {
             Kidney Disease
           </label>
         </div>
+        <div className="mb-2">
+          <label className="block text-gray-700">
+            <input
+              type="checkbox"
+              name="healthConditions"
+              value="none"
+              checked={formData.healthConditions.includes('none')}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            None
+          </label>
+        </div>
+        <div className="mb-2">
+            <input
+              type="text"
+              name="healthConditionsSpecific"
+              placeholder='other (specify)'
+              onChange={handleChange}
+              className="mr-2 p-2 rounded-xl border-gray-200 border"
+            />
+        </div>
 
         <h2 className="text-xl font-semibold mb-4">Specific Nutrient Concerns</h2>
 
@@ -279,6 +309,15 @@ const NutrientCheckerForm = ({user}) => {
             Protein Intake
           </label>
         </div>
+        <div className="mb-2">
+            <input
+              type="text"
+              name="nutrientConcersSpecific"
+              placeholder='other (specify)'
+              onChange={handleChange}
+              className="mr-2 p-2 rounded-xl border-gray-200 border"
+            />
+        </div>
         <h2 className="text-xl font-semibold mb-4">Specific Allergies</h2>
 
         <div className="mb-2">
@@ -335,6 +374,28 @@ const NutrientCheckerForm = ({user}) => {
             />
             Soy
           </label>
+        </div>
+        <div className="mb-2">
+          <label className="block text-gray-700">
+            <input
+              type="checkbox"
+              name="allergies"
+              value="none"
+              checked={formData.allergies.includes('none')}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            None
+          </label>
+        </div>
+        <div className="mb-2">
+            <input
+              type="text"
+              name="allergiesSpecific"
+              placeholder='other (specify)'
+              onChange={handleChange}
+              className="mr-2 p-2 rounded-xl border-gray-200 border"
+            />
         </div>
 
 

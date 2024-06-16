@@ -26,12 +26,16 @@ const Profile = () => {
   const {currentUser} = useAuth();
   const [userExists, setUserExists] = useState(null);
   const getData = async() =>{
-    const querySnapshot = await getDocs(collection(db, "healthdata"));
-    querySnapshot.forEach((doc) => {
-      if(doc.data().email === currentUser.email){
-        setUserExists(doc.id)
-      };
-    });
+    try{
+      const querySnapshot = await getDocs(collection(db, "healthdata"));
+      querySnapshot.forEach((doc) => {
+        if(doc.data().email === currentUser.email){
+          setUserExists(doc.id)
+        };
+      });
+    }catch(e){
+      navigate('/');
+    }
   }
   useEffect(()=>{
     getData()
