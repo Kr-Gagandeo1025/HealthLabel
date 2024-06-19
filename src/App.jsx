@@ -23,9 +23,10 @@ function App() {
         if(doc.data().email === currentUser?.email){
           setUserData(
             `My age is ${doc.data().age}, ${doc.data().gender}, weight is ${doc.data().weight}, height is ${doc.data().height} cm.
-            My allergies are/is ${doc.data().allergies}. My health Conditions are/is ${doc.data().healthConditions}.
-            My nutrient concerns are/is ${doc.data().nutrientConcerns}. Is the food with provided Nutrient Label is good for my consumption.
-            Provide me it's consumptions guidelines.
+            I have ${doc.data().allergies?doc.data().allergies:""} ${doc.data().allergiesSpecific?doc.data().allergiesSpecific:"no"} allergies.
+            I have ${doc.data().healthConditions?doc.data().healthConditions:""} ${doc.data().healthConditionsSpecific?doc.data().healthConditionsSpecific:"no"} health conditions. 
+            My nutrient concerns are/is ${doc.data().nutrientConcerns?doc.data().nutrientConcerns:""} ${doc.data().nutrientConcersSpecific?doc.data().nutrientConcersSpecific:""}.
+            Provide me it's consumptions guidelines. If there are no specific guidelines, provide me a general description of the nutrient label.
             `
           )
         };
@@ -40,6 +41,7 @@ function App() {
   const gen = async () => {
     try{
       if(userData !== "") {
+        console.log(userData);
         setLoading(true)
         setGenResponse("");
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
