@@ -58,7 +58,9 @@ const NutrientCheckerForm = ({user}) => {
 
     const {name, email, age, gender, height, weight, healthConditions, nutrientConcerns, allergies, healthConditionsSpecific,
       nutrientConcersSpecific,allergiesSpecific} = formData;
-    if(formData.age === "" || formData.gender === "" || formData.height === "" || formData.weight === ""){
+    if(formData.age === "" || formData.gender === "" || formData.height === "" || formData.weight === "" || 
+      (formData.healthConditions.length===0 && formData.healthConditionsSpecific==="") || (formData.nutrientConcerns.length===0 && formData.nutrientConcersSpecific==="") || 
+      (formData.allergies.length===0 && formData.allergiesSpecific==="") ){
         toast.error('Please fill * marked fields!', toastData)
     }else{
         try{
@@ -172,7 +174,7 @@ const NutrientCheckerForm = ({user}) => {
           />
         </div>
 
-        <h2 className="text-xl font-semibold mb-4">Health Conditions</h2>
+        <h2 className="text-xl font-semibold mb-4">Health Conditions*</h2>
 
         <div className="mb-2">
           <label className="block text-gray-700">
@@ -252,7 +254,7 @@ const NutrientCheckerForm = ({user}) => {
             />
         </div>
 
-        <h2 className="text-xl font-semibold mb-4">Specific Nutrient Concerns</h2>
+        <h2 className="text-xl font-semibold mb-4">Specific Nutrient Concerns*</h2>
 
         <div className="mb-2">
           <label className="block text-gray-700">
@@ -318,7 +320,7 @@ const NutrientCheckerForm = ({user}) => {
               className="mr-2 p-2 rounded-xl border-gray-200 border"
             />
         </div>
-        <h2 className="text-xl font-semibold mb-4">Specific Allergies</h2>
+        <h2 className="text-xl font-semibold mb-4">Specific Allergies*</h2>
 
         <div className="mb-2">
           <label className="block text-gray-700">
