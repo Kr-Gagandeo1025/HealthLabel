@@ -71,6 +71,7 @@ const UpImage = ({takenimg,setTakenImg}) => {
         theme="light"
         transition={Slide}
       />
+      <span className="text-xl font-bold">scan food nutrient labels here ↓</span>
       <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
         onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
       />
