@@ -11,11 +11,15 @@ import Balance from './components/Balance';
 // import { AuthProvider } from './contexts/authContext';
 function App() {
   const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   const [takenimg,setTakenImg] = React.useState(null);
   const {currentUser} = useAuth();
   const [userData,setUserData] = useState("");
   const [genResponse,setGenResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [convo,setConvo] = useState("");
+  const [isConvo,setIsConvo] = useState(false);
+  let historyData = [];
   const getData = async() =>{
     try{
       const querySnapshot = await getDocs(collection(db, "healthdata"));
@@ -26,7 +30,7 @@ function App() {
             I have ${doc.data().allergies?doc.data().allergies:""} ${doc.data().allergiesSpecific?doc.data().allergiesSpecific:"no"} allergies.
             I have ${doc.data().healthConditions?doc.data().healthConditions:""} ${doc.data().healthConditionsSpecific?doc.data().healthConditionsSpecific:"no"} health conditions. 
             My nutrient concerns are/is ${doc.data().nutrientConcerns?doc.data().nutrientConcerns:""} ${doc.data().nutrientConcersSpecific?doc.data().nutrientConcersSpecific:""}.
-            Provide me it's consumptions guidelines. If there are no specific guidelines, provide me a general description of the nutrient label.
+            Provide me it's consumptions guidelines. If there are no specific guidelines, provide me a general nutritional content breakdown of the nutrient label.
             `
           )
         };
@@ -41,10 +45,9 @@ function App() {
   const gen = async () => {
     try{
       if(userData !== "") {
-        console.log(userData);
+        // console.log(userData);
         setLoading(true)
         setGenResponse("");
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const prompt = userData;
         const image = {
           inlineData:{
@@ -55,6 +58,7 @@ function App() {
         const genResult = await model.generateContent([prompt,image]);
         setGenResponse(genResult.response.text());
         setLoading(false);
+        historyData.push({role:"model",parts:[{text:genResponse}]});
       }else{ 
         setGenResponse("Your health data was not found add your heath data please!!");
       }
@@ -63,6 +67,35 @@ function App() {
     }
     
   }
+  const handleConvo = (e) =>{
+    setConvo(e.target.value);
+  }
+  const startConvo = async () =>{
+    console.log(historyData);
+    const chat = model.startChat({
+      history: historyData,
+      generationConfig: {
+        maxOutputTokens: 100,
+      },
+    });
+
+    
+    const msg = convo;
+    if(convo!==""){
+      historyData.push({role:"user",parts:[{text:userData}]});
+      historyData.push({role:"model",parts:[{text:genResponse}]});
+      setGenResponse("");
+      const result = await chat.sendMessage(msg);
+      const response = await result.response;
+      const text = response.text();
+      // console.log(text);
+      setGenResponse(text);
+      setUserData(convo);
+    }else{
+      console.log("error cannot continue convo...")
+    }
+  }
+  
   return (
     <div className="flex justify-center items-center sm:-4 bg-gradient-to-br from-slate-50 via-gray-100 to-zinc-200">
       <div className="flex flex-col items-center lg:w-[70%] rounded-lg w-[100%] min-h-screen">
@@ -71,9 +104,9 @@ function App() {
           <Balance/>
         </div>
         <div className="lg:flex-row w-full sm:p-4 flex flex-col justify-center items-center">
-          <UpImage takenimg={takenimg} setTakenImg={setTakenImg}/>
+          <UpImage takenimg={takenimg} setTakenImg={setTakenImg} isConvo={isConvo}/>
           {currentUser &&
-          <AIPrompt img={takenimg} getData={gen} response={genResponse} loading={loading}/>
+          <AIPrompt img={takenimg} getData={gen} response={genResponse} loading={loading} convo={convo} handleConvo={handleConvo} startConvo={startConvo} isConvo={isConvo} setIsConvo={setIsConvo}/>
           }
           {!currentUser && <p className='text-gray-500 px-5 py-5 text-center'>Login and Fill Health Info to get Prompts</p>}
         </div>

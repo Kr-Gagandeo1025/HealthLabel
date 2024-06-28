@@ -6,7 +6,8 @@ import { MdFlipCameraIos } from 'react-icons/md';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const UpImage = ({takenimg,setTakenImg}) => {
+
+const UpImage = ({takenimg,setTakenImg, isConvo}) => {
   const [cameraPos, setCameraPos] = useState(FACING_MODES.USER)
   const fileInputRef = useRef(); 
 
@@ -71,10 +72,10 @@ const UpImage = ({takenimg,setTakenImg}) => {
         theme="light"
         transition={Slide}
       />
-      <span className="text-xl font-bold">scan food nutrient labels here ↓</span>
-      <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
+      {!isConvo?<span className="text-xl font-bold">scan food nutrient labels here ↓</span>:<span className="text-xl font-bold">Camera is off, conversation started. <br />Click on Conversation Icon to stop convo and start Camera</span>}
+      {!isConvo && <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
         onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
-      />
+      />}
       <div className="flex justify-between items-center">
         {takenimg && <img src={takenimg} alt="label" className="h-[100px] p-2 rounded-2xl"/>}
         <div className='flex gap-2 justify-between items-center'>
