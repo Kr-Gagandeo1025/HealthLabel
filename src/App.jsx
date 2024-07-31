@@ -6,7 +6,8 @@ import { useAuth } from './contexts/authContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase/firebase';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import Balance from './components/Balance';
+import { Link } from 'react-router-dom';
+import { BiHistory } from 'react-icons/bi';
 
 // import { AuthProvider } from './contexts/authContext';
 function App() {
@@ -56,9 +57,10 @@ function App() {
           },
         };
         const genResult = await model.generateContent([prompt,image]);
+        historyData.push({role:"user",parts:[{text:userData}]});
         setGenResponse(genResult.response.text());
-        setLoading(false);
         historyData.push({role:"model",parts:[{text:genResponse}]});
+        setLoading(false);
       }else{ 
         setGenResponse("Your health data was not found add your heath data please!!");
       }
@@ -82,8 +84,6 @@ function App() {
     
     const msg = convo;
     if(convo!==""){
-      historyData.push({role:"user",parts:[{text:userData}]});
-      historyData.push({role:"model",parts:[{text:genResponse}]});
       setGenResponse("");
       const result = await chat.sendMessage(msg);
       const response = await result.response;
@@ -91,9 +91,12 @@ function App() {
       // console.log(text);
       setGenResponse(text);
       setUserData(convo);
+      
     }else{
       console.log("error cannot continue convo...")
     }
+    historyData.push({role:"user",parts:[{text:userData}]});
+    historyData.push({role:"model",parts:[{text:genResponse}]});
   }
   
   return (
@@ -101,7 +104,7 @@ function App() {
       <div className="flex flex-col items-center lg:w-[70%] rounded-lg w-[100%] min-h-screen">
         <Nav page="home"/>
         <div className='flex w-full justify-end items-center p-4 mb-0'>
-          <Balance/>
+          <Link to="profile" className='border p-2 rounded-xl'><BiHistory className='text-3xl'/></Link>
         </div>
         <div className="lg:flex-row w-full sm:p-4 flex flex-col justify-center items-center">
           <UpImage takenimg={takenimg} setTakenImg={setTakenImg} isConvo={isConvo}/>

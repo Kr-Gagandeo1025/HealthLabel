@@ -8,7 +8,6 @@ import Contactus from '../components/Contactus';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { doSingOut } from '../firebase/auth';
-import Balance from '../components/Balance';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -83,7 +82,7 @@ const Profile = () => {
         <div className='flex flex-col items-center justify-between lg:w-[50%] w-[100%]'>
         <Nav page="profile"/>
         <div className='flex w-full justify-end items-center p-4 mb-0'>
-          <Balance/>
+          {/* <Balance/> */}
         </div>
         {currentUser && <h1 className="text-left w-full px-1 font-bold">Hey 👋, {currentUser.displayName}</h1>}
         {

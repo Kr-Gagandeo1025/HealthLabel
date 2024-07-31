@@ -26,3 +26,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.markdown-body {
+  color: #000000;
+}
+
+.markdown-body h1 {
+  @apply text-2xl font-bold mb-4;
+}
+
+.markdown-body p {
+  @apply mb-4;
+}
+
+.markdown-body strong {
+  @apply font-bold;
+}
+
+.markdown-body em {
+  @apply italic;
+}
+
+/* Add more styles as needed */
+

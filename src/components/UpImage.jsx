@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Camera, { FACING_MODES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import { BiUpload } from 'react-icons/bi';
-import { MdFlipCameraIos } from 'react-icons/md';
+import { MdFlipCameraAndroid, MdUploadFile } from 'react-icons/md';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -76,11 +75,11 @@ const UpImage = ({takenimg,setTakenImg, isConvo}) => {
       {!isConvo && <Camera imageType='png' idealResolution={{width:800,height:720}} idealFacingMode = {cameraPos} isImageMirror = {false}
         onTakePhoto = { (dataUri) => { handleTakePhoto(dataUri); } }
       />}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center w-full">
         {takenimg && <img src={takenimg} alt="label" className="h-[100px] p-2 rounded-2xl"/>}
-        <div className='flex gap-2 justify-between items-center'>
-          <button onClick={handleUpload}><BiUpload className='sm:text-5xl text-3xl'/></button>
-          <button onClick={handleCameraFlip}><MdFlipCameraIos className='sm:text-5xl text-3xl'/></button>
+        <div className='flex gap-2 items-center mt-5 border rounded-lg p-2'>
+          <button onClick={handleUpload}><MdUploadFile className='sm:text-5xl text-3xl'/></button>
+          <button onClick={handleCameraFlip}><MdFlipCameraAndroid className='sm:text-5xl text-3xl'/></button>
         </div>
       </div>
       <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
