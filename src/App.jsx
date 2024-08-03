@@ -104,7 +104,7 @@ function App() {
       <div className="flex flex-col items-center lg:w-[70%] rounded-lg w-[100%] min-h-screen">
         <Nav page="home"/>
         <div className='flex w-full justify-end items-center p-4 mb-0'>
-          <Link to="profile" className='border p-2 rounded-xl'><BiHistory className='text-3xl'/></Link>
+          {currentUser&&<Link to="profile" className='border p-2 rounded-xl'><BiHistory className='text-3xl'/></Link>}
         </div>
         <div className="lg:flex-row w-full sm:p-4 flex flex-col justify-center items-center">
           <UpImage takenimg={takenimg} setTakenImg={setTakenImg} isConvo={isConvo}/>

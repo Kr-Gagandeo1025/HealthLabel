@@ -8,6 +8,7 @@ import Contactus from '../components/Contactus';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { doSingOut } from '../firebase/auth';
+import HistoryPrompts from '../components/HistoryPrompts';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -100,6 +101,7 @@ const Profile = () => {
           :
           <NutrientCheckerForm user={currentUser}/>
         }
+        <HistoryPrompts/>
         <Contactus/>
         </div>
     </div>

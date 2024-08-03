@@ -16,8 +16,9 @@ const useTypingEffect = (content, speed = 50) => {
 
     return () => clearInterval(intervalId);
   }, [content, speed]);
-
-  return displayedContent;
+  if(displayedContent !== undefined){
+    return displayedContent;
+  }
 };
 
 export default useTypingEffect;
